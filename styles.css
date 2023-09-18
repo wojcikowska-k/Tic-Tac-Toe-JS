@@ -1,3 +1,8 @@
+:root {
+  --circle: blue;
+  --cross: red;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -32,7 +37,7 @@ body {
   height: 90px;
   width: 90px;
   border-radius: 50%;
-  border: 15px solid blue;
+  border: 15px solid var(--circle);
   box-sizing: border-box;
 }
 
@@ -46,7 +51,7 @@ body {
 .cross:after {
   position: absolute;
   content: "";
-  background-color: red;
+  background-color: var(--cross);
 }
 .cross:before {
   left: 50%;
@@ -59,4 +64,25 @@ body {
   height: 30%;
   margin-top: -15%;
   width: 100%;
+}
+
+h1 {
+  font-size: 52px;
+}
+
+.title-circle {
+  color: var(--circle);
+}
+.title-cross {
+  color: var(--cross);
+}
+
+#info {
+  font-size: 24px;
+}
+.info-circle {
+  color: var(--circle);
+}
+.info-cross {
+  color: var(--cross);
 }
