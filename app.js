@@ -1,9 +1,20 @@
 const gameboard = document.querySelector("#gameboard");
 const infoDisplay = document.querySelector("#info");
+const scoreCircle = document.querySelector("#score-circle");
+const scoreCross = document.querySelector("#score-cross");
+const reset = document.querySelector("#reset");
+const newBoard = document.querySelector("#new-board");
 
 const startCells = ["", "", "", "", "", "", "", "", ""];
 
 let go = "circle";
+let winsCircle = 0;
+let winsCross = 0;
+winsCircle = localStorage.getItem("Circle's wins");
+winsCross = localStorage.getItem("Cross's wins");
+scoreCircle.textContent = winsCircle;
+scoreCross.textContent = winsCross;
+
 infoDisplay.textContent = "Circle goes first";
 
 const toggleInfoColor = (go) => {
@@ -57,9 +68,12 @@ const checkScore = () => {
     if (circleWins) {
       infoDisplay.textContent = "Circle Wins!";
       toggleInfoColor("circle");
+      winsCircle = Number(winsCircle) + 1;
+      scoreCircle.textContent = winsCircle;
       allsquares.forEach(
         (square) => square.replaceWith(square.cloneNode(true)) //this way there is no more eventListener on the square
       );
+      localStorage.setItem("Circle's wins", winsCircle);
       return;
     }
   });
@@ -71,12 +85,31 @@ const checkScore = () => {
     if (crossWins) {
       infoDisplay.textContent = "Cross Wins!";
       toggleInfoColor("cross");
+      winsCross = Number(winsCross) + 1;
+      scoreCross.textContent = winsCross;
       allsquares.forEach((square) =>
         square.replaceWith(square.cloneNode(true))
       );
+      localStorage.setItem("Cross's wins", winsCross);
       return;
     }
   });
 };
 
 createBoard();
+
+const resetScore = () => {
+  localStorage.clear();
+  winsCircle = 0;
+  winsCross = 0;
+  scoreCircle.textContent = winsCircle;
+  scoreCross.textContent = winsCross;
+  localStorage.setItem("Circle's wins", winsCircle);
+  localStorage.setItem("Cross's wins", winsCross);
+};
+
+reset.addEventListener("click", resetScore);
+newBoard.addEventListener("click", () => {
+  gameboard.innerHTML = "";
+  createBoard();
+});

@@ -10,8 +10,18 @@
     <h1>
       <span class="title-circle">O</span> vs <span class="title-cross">X</span>
     </h1>
-    <div id="gameboard"></div>
+    <div class="game">
+      <div class="score">
+        <span class="title-circle">O</span><span id="score-circle"></span>
+      </div>
+      <div id="gameboard"></div>
+      <div class="score">
+        <span class="title-cross">X</span><span id="score-cross"></span>
+      </div>
+    </div>
     <p id="info" class="info-circle"></p>
+    <button id="new-board">AGAIN!</button>
+    <button id="reset">Reset Score</button>
     <script src="app.js"></script>
   </body>
 </html>
