@@ -1,6 +1,8 @@
 :root {
-  --circle: blue;
-  --cross: red;
+  --circle: #03e9f4;
+  --cross: #e9033d;
+  --dark: #141e30;
+  --light: #c2c0c0;
 }
 
 body {
@@ -11,6 +13,19 @@ body {
   align-items: center;
   height: 100vh;
   flex-direction: column;
+  font-family: sans-serif;
+  background-color: var(--dark);
+}
+
+h1 {
+  font-size: 52px;
+  color: var(--light);
+}
+.title-circle {
+  color: var(--circle);
+}
+.title-cross {
+  color: var(--cross);
 }
 
 .game {
@@ -21,7 +36,7 @@ body {
 .score {
   height: 300px;
   width: 100px;
-  border: solid 2px black;
+  border: solid 2px var(--light);
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -30,21 +45,24 @@ body {
   gap: 40px;
   padding-top: 20px;
 }
+#score-circle,
+#score-cross {
+  color: var(--light);
+}
 
 #gameboard {
   width: 300px;
   height: 300px;
-  background-color: black;
   display: flex;
   flex-wrap: wrap;
-  border: solid 1px black;
+  border: solid 1px var(--light);
 }
 
 .square {
   width: 100px;
   height: 100px;
-  background-color: white;
-  border: solid 2px black;
+  background-color: var(--dark);
+  border: solid 2px var(--light);
   box-sizing: border-box;
   display: flex;
   justify-content: center;
@@ -84,17 +102,6 @@ body {
   width: 100%;
 }
 
-h1 {
-  font-size: 52px;
-}
-
-.title-circle {
-  color: var(--circle);
-}
-.title-cross {
-  color: var(--cross);
-}
-
 #info {
   font-size: 24px;
 }
@@ -103,4 +110,114 @@ h1 {
 }
 .info-cross {
   color: var(--cross);
+}
+
+/* buttons */
+.btn {
+  position: relative;
+  display: inline-block;
+  padding: 10px 20px;
+  color: var(--circle);
+  font-size: 16px;
+  text-decoration: none;
+  text-transform: uppercase;
+  overflow: hidden;
+  transition: 0.5s;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  letter-spacing: 4px;
+  border: none;
+  background-color: var(--dark);
+  cursor: pointer;
+}
+
+.btn:hover {
+  background: var(--circle);
+  color: white;
+  box-shadow: 0 0 5px var(--circle), 0 0 25px var(--circle),
+    0 0 50px var(--circle), 0 0 100px var(--circle);
+}
+
+.btn span {
+  position: absolute;
+  display: block;
+}
+
+.btn span:nth-child(1) {
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--circle));
+  animation: btn-anim1 4s linear infinite;
+}
+
+@keyframes btn-anim1 {
+  0% {
+    left: -100%;
+  }
+  50%,
+  100% {
+    left: 100%;
+  }
+}
+
+.btn span:nth-child(2) {
+  top: -100%;
+  right: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(180deg, transparent, var(--circle));
+  animation: btn-anim2 4s linear infinite;
+  animation-delay: 1s;
+}
+
+@keyframes btn-anim2 {
+  0% {
+    top: -100%;
+  }
+  50%,
+  100% {
+    top: 100%;
+  }
+}
+
+.btn span:nth-child(3) {
+  bottom: 0;
+  right: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(270deg, transparent, var(--circle));
+  animation: btn-anim3 4s linear infinite;
+  animation-delay: 2s;
+}
+
+@keyframes btn-anim3 {
+  0% {
+    right: -100%;
+  }
+  50%,
+  100% {
+    right: 100%;
+  }
+}
+
+.btn span:nth-child(4) {
+  bottom: -100%;
+  left: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(360deg, transparent, var(--circle));
+  animation: btn-anim4 4s linear infinite;
+  animation-delay: 3s;
+}
+
+@keyframes btn-anim4 {
+  0% {
+    bottom: -100%;
+  }
+  50%,
+  100% {
+    bottom: 100%;
+  }
 }
