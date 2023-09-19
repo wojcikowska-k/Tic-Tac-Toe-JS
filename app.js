@@ -6,6 +6,8 @@ const reset = document.querySelector("#reset");
 const newBoard = document.querySelector("#new-board");
 
 const startCells = ["", "", "", "", "", "", "", "", ""];
+const allElementsIds = ["0", "1", "2", "3", "4", "5", "6", "7", "8"];
+let usedElementsIds = [];
 
 let go = "circle";
 let winsCircle = 0;
@@ -38,13 +40,41 @@ const createBoard = () => {
   });
 };
 
+const compute = () => {
+  const freeIds = allElementsIds.filter(
+    (val) => !usedElementsIds.includes(val)
+  );
+
+  const randomId = freeIds[Math.floor(Math.random() * freeIds.length)];
+  const allsquares = document.querySelectorAll(".square");
+
+  const randomSquare = allsquares[randomId];
+  if (randomSquare === undefined) {
+    // console.log("No more squares");
+    return;
+  }
+  const goDisplay = document.createElement("div");
+  goDisplay.classList.add("cross");
+  randomSquare.append(goDisplay);
+
+  usedElementsIds.push(randomId);
+  checkScore();
+};
+
 const addGo = (e) => {
   const goDisplay = document.createElement("div");
-  goDisplay.classList.add(go);
+  goDisplay.classList.add("circle");
   e.target.append(goDisplay);
-  go = go === "circle" ? "cross" : "circle";
-  infoDisplay.textContent = "Now it is " + go + "'s turn.";
-  toggleInfoColor(go);
+  // go = go === "circle" ? "cross" : "circle";
+  // infoDisplay.textContent = "Now it is " + go + "'s turn.";
+  // toggleInfoColor(go);
+
+  const elementId = e.target.getAttribute("id");
+  usedElementsIds.push(elementId);
+
+  setTimeout(() => {
+    compute();
+  }, 500);
   checkScore();
 };
 
@@ -112,4 +142,5 @@ reset.addEventListener("click", resetScore);
 newBoard.addEventListener("click", () => {
   gameboard.innerHTML = "";
   createBoard();
+  usedElementsIds = [];
 });

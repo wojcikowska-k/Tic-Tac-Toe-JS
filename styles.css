@@ -75,6 +75,7 @@ h1 {
   border-radius: 50%;
   border: 15px solid var(--circle);
   box-sizing: border-box;
+  animation: go-anim 0.5s ease-in-out;
 }
 
 .cross {
@@ -83,11 +84,26 @@ h1 {
   position: relative;
   transform: rotate(45deg);
 }
+
+@keyframes go-anim {
+  0% {
+    /* transform: scale(0.5); */
+    opacity: 0;
+  }
+
+  100% {
+    /* transform: scale(1); */
+    opacity: 1;
+  }
+}
+
 .cross:before,
 .cross:after {
   position: absolute;
   content: "";
   background-color: var(--cross);
+  animation: go-anim 0.5s ease-in-out;
+  animation-delay: 0.5s;
 }
 .cross:before {
   left: 50%;
