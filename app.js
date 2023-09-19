@@ -12,6 +12,8 @@ let usedElementsIds = [];
 let go = "circle";
 let winsCircle = 0;
 let winsCross = 0;
+localStorage.setItem("Circle's wins", winsCircle);
+localStorage.setItem("Cross's wins", winsCross);
 winsCircle = localStorage.getItem("Circle's wins");
 winsCross = localStorage.getItem("Cross's wins");
 scoreCircle.textContent = winsCircle;
@@ -50,7 +52,6 @@ const compute = () => {
 
   const randomSquare = allsquares[randomId];
   if (randomSquare === undefined) {
-    // console.log("No more squares");
     return;
   }
   const goDisplay = document.createElement("div");
@@ -58,6 +59,8 @@ const compute = () => {
   randomSquare.append(goDisplay);
 
   usedElementsIds.push(randomId);
+
+  randomSquare.replaceWith(randomSquare.cloneNode(true));
   checkScore();
 };
 
@@ -65,16 +68,11 @@ const addGo = (e) => {
   const goDisplay = document.createElement("div");
   goDisplay.classList.add("circle");
   e.target.append(goDisplay);
-  // go = go === "circle" ? "cross" : "circle";
-  // infoDisplay.textContent = "Now it is " + go + "'s turn.";
-  // toggleInfoColor(go);
 
   const elementId = e.target.getAttribute("id");
   usedElementsIds.push(elementId);
 
-  setTimeout(() => {
-    compute();
-  }, 500);
+  compute();
   checkScore();
 };
 
