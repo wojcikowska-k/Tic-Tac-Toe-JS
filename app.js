@@ -12,8 +12,8 @@ let usedElementsIds = [];
 let go = "circle";
 let winsCircle = 0;
 let winsCross = 0;
-localStorage.setItem("Circle's wins", winsCircle);
-localStorage.setItem("Cross's wins", winsCross);
+localStorage.setItem("Circle's wins", 0);
+localStorage.setItem("Cross's wins", 0);
 winsCircle = localStorage.getItem("Circle's wins");
 winsCross = localStorage.getItem("Cross's wins");
 scoreCircle.textContent = winsCircle;
@@ -61,7 +61,6 @@ const compute = () => {
   usedElementsIds.push(randomId);
 
   randomSquare.replaceWith(randomSquare.cloneNode(true));
-  checkScore();
 };
 
 const addGo = (e) => {
@@ -132,8 +131,8 @@ const resetScore = () => {
   winsCross = 0;
   scoreCircle.textContent = winsCircle;
   scoreCross.textContent = winsCross;
-  localStorage.setItem("Circle's wins", winsCircle);
-  localStorage.setItem("Cross's wins", winsCross);
+  localStorage.setItem("Circle's wins", 0);
+  localStorage.setItem("Cross's wins", 0);
 };
 
 reset.addEventListener("click", resetScore);
